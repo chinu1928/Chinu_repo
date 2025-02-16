@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Image Prediction</title>
+	<style>
+		body {
+			background-color: #000;
+			color: #fff;
+			font-family: 'Courier New', monospace;
+			font-size: 16px;
+			text-align: center;
+			padding: 50px;
+		}
+		h1 {
+			font-size: 32px;
+			margin-bottom: 30px;
+			animation: neon 1.5s ease-in-out infinite alternate;
+		}
+		@keyframes neon {
+			from {
+				text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #0f0, 0 0 40px #0f0, 0 0 50px #0f0, 0 0 60px #0f0;
+			}
+			to {
+				text-shadow: none;
+			}
+		}
+		.button-container {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-bottom: 30px;
+		}
+		button {
+			background-color: #0f0;
+			color: #000;
+			border: none;
+			padding: 10px 20px;
+			margin: 10px;
+			border-radius: 5px;
+			cursor: pointer;
+			font-size: 20px;
+			transition: all 0.2s ease-in-out;
+		}
+		button:hover {
+			transform: scale(1.1);
+			background-color: #f00;
+			color: #fff;
+		}
+		input[type=file] {
+			display: none;
+		}
+		.upload-label {
+			background-color: #0f0;
+			color: #000;
+			padding:10px 20px;
+			margin: 10px;
+			border-radius: 5px;
+			cursor: pointer;
+			font-size: 20px;
+			transition: all 0.2s ease-in-out;
+		}
+		.upload-label:hover {
+			transform: scale(1.1);
+			background-color: #f00;
+			color: #fff;
+		}
+		img {
+			max-width: 500px;
+			max-height: 500px;
+			margin: 20px auto;
+			display: block;
+		}
+	</style>
+</head>
+<body>
+	<h1>Image Prediction</h1>
+	<form method="POST" action="/predict" enctype="multipart/form-data">
+		<div class="button-container">
+			<label for="image-upload" class="upload-label">Upload Image</label>
+			<input type="file" id="image-upload" name="image">
+			<button type="submit">Predict</button>
+		</div>
+	</form>
+	{% if prediction %}
+        <img alt="Uploaded Image" src="data:image/jpeg;base64,{{ img_data }}">
+        <p> The prediction is: {{ prediction }} </p>
+	{% endif %}
+</body>
+</html>
